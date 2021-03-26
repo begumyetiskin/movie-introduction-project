@@ -3,7 +3,6 @@ package movie.project.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Data
@@ -11,8 +10,10 @@ import java.util.List;
 @Table(name = "movies")
 public class Movie {
     @Id
-    @Column(name = "movie_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "movie_id",unique=true, nullable = false)
+
     private Long id;
 
     @Column(nullable = false)
@@ -33,8 +34,4 @@ public class Movie {
     @Column(nullable = false)
     private String language;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="movies_casts", joinColumns=@JoinColumn(name="movie_id"),
-            inverseJoinColumns=@JoinColumn(name="cast_id"))
-    private List<Cast> casts;
 }

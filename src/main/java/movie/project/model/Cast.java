@@ -9,12 +9,13 @@ import javax.persistence.*;
 @Table(name = "casts")
 public class Cast {
     @Id
-    @Column(name = "cast_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "cast_id",unique=true, nullable = false)
+
     private Long id;
 
     private String firstName;
     private String lastName;
-
 
 }

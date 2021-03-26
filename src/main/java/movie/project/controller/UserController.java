@@ -113,10 +113,10 @@ public class UserController {
                 .anyMatch(r -> r.getAuthority().equals("ADMIN"));*/
 
         if (currentUser.getRole().getId() == 1) {
-            return "movie/show";
+            return "redirect:/list";
         }
         if (currentUser.getRole().getId() == 2) {
-            return "movie/list";
+            return "redirect:/movie/listMovie";
         }
 
         return "login";
@@ -127,6 +127,9 @@ public class UserController {
         model.addAttribute("user", new User());
         return "login";
     }
+
+
+
 }
 
 
