@@ -1,23 +1,30 @@
 package movie.project.controller;
 
+import movie.project.config.FileUploadUtil;
 import movie.project.model.Movie;
+import movie.project.service.MovieCastService;
 import movie.project.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 public class MovieController {
 
     @Autowired
     MovieService movieService;
+
+    @Autowired
+    MovieCastService movieCastService;
 
     Long movieID;
 
@@ -39,19 +46,21 @@ public class MovieController {
         return "admin/listMovie";
     }
 
-    @GetMapping("/list")
+    @GetMapping("/movie/list")
     public String list(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "user/listMovie";
     }
 
     @PostMapping(value = "/movie/add")
-    public String createMovie(@Valid @ModelAttribute("movie") Movie movie, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "admin/addMovie";
-        }
-        movieService.createMovie(movie);
-        return "admin/listMovie";
+    public RedirectView createMovie(@Valid @ModelAttribute("movie") Movie movie, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        movie.setImageUrl(fileName);
+        Movie savedMovie = movieService.createMovie(movie);
+        String uploadDir = "movie-photos/" + savedMovie.getId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        return new RedirectView("/movie/listMovie", true);
     }
 
 
@@ -74,9 +83,12 @@ public class MovieController {
     @RequestMapping("/movie/delete/{id}")
     public String deleteMovieById(@PathVariable Long id) {
         movieService.deleteMovieById(id);
+        movieCastService.deleteMovieCastById(id);
         System.out.println("silindi");
         return "redirect:/movie/listMovie";
     }
+
+
 
 
 }

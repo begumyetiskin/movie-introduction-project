@@ -1,11 +1,13 @@
 package movie.project.service;
 
 
+import movie.project.model.Movie;
 import movie.project.model.MovieCast;
 import movie.project.repository.MovieCastRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,4 +34,16 @@ public class MovieCastServiceImpl implements MovieCastService {
         }
         return null;
     }
+
+    @Override
+    public List<MovieCast> getAllMovies(){
+        return movieCastRepository.findAll();
+    }
+
+    @Override
+    public void deleteMovieCastById(Long id) {
+        movieCastRepository.deleteById(id);
+    }
+
+
 }

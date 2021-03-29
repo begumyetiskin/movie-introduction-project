@@ -44,7 +44,7 @@ public class CastController {
         return "admin/addCast";
     }
 
-    @GetMapping("/cast/list")
+    @GetMapping("/cast/listCast")
     public String listCasts(Model model) {
         model.addAttribute("casts", castService.getAllCasts());
         return "admin/listCast";
@@ -64,7 +64,6 @@ public class CastController {
             }
         }
         System.out.println(castID);
-        // MovieCast tablosuna veri ekleme:
 
         movieCast.setMovie(movieService.getMovieById(movieID));
         movieCast.setCast(castService.getCastById(castID));
@@ -85,6 +84,10 @@ public class CastController {
         return "redirect:/cast/add";
     }
 
-
+    @RequestMapping("/cast/delete/{id}")
+    public String deleteMovieById(@PathVariable Long id) {
+        castService.deleteCastById(id);
+        return "redirect:/cast/listCast";
+    }
 
 }

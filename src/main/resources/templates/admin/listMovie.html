@@ -23,11 +23,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/movie/list">Movies </a>
+            <li class="nav-item">
+                <a class="nav-link" href="/movie/listMovie">Movies </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/movie/add">Add Movie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cast/listCast">Casts </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -43,12 +46,11 @@
         <table class="table table-hover table-striped">
             <thead>
             <tr class="thead-dark">
-                <th>Id</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Year</th>
                 <th>Category</th>
                 <th>Description</th>
-                <th>Image Url</th>
                 <th>Language</th>
                 <th>Actions</th>
             </tr>
@@ -56,14 +58,12 @@
             <tbody>
 
             <tr th:each="movie : ${movies}">
-                <td th:text="${movie.id}"></td>
+                <td> <a href="/cast/listCast"><img th:src="@{${movie.photosImagePath}}"/></a></td>
                 <td th:text="${movie.name}"></td>
                 <td th:text="${movie.releaseYear}"></td>
                 <td th:text="${movie.category}"></td>
                 <td th:text="${movie.description}"></td>
-                <td th:text="${movie.imageUrl}"></td>
                 <td th:text="${movie.language}"></td>
-
                 <td class="text-center">
                     <form th:action="@{/movie-action}" th:object="${moviecast}" method="post">
                         <input type="hidden" name="id" th:value="${movie.id}">
@@ -101,6 +101,12 @@
     }
 
     table {
-        width: 500px;
+        width: 100%;
     }
+
+    img {
+        width: 180px;
+        height: 130px;
+    }
+
 </style>

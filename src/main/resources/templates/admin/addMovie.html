@@ -21,11 +21,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/movie/listMovie">Movies</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/movie/listMovie">Movies </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/movie/add">Add Movie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cast/listCast">Casts </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -39,76 +42,71 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-            <form autocomplete="off" th:action="@{/movie/add}" th:object="${movie}" method="post">
+            <form autocomplete="off" th:action="@{/movie/add}" th:object="${movie}" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Name:</label><br>
-                <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input type="text" id="name" name="name" placeholder="movie name" th:field="*{name}"
+                               class="form-control"/>
                     </div>
-                    <input type="text" id="name" name="name" placeholder="movie name" th:field="*{name}"
-                           class="form-control"/>
-                </div>
                 </div>
 
                 <div class="form-group">
                     <label>Release Year:</label><br>
                     <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="text" id="releaseYear" name="releaseYear" placeholder="release year"
+                               th:field="*{releaseYear}"
+                               class="form-control"/>
                     </div>
-                    <input type="text" id="releaseYear" name="releaseYear" placeholder="release year"
-                           th:field="*{releaseYear}"
-                           class="form-control" />
-                </div>
                 </div>
 
                 <div class="form-group">
                     <label>Category:</label><br>
                     <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="text" id="category" name="category" placeholder="category"
+                               th:field="*{category}"
+                               class="form-control"/>
                     </div>
-                    <input type="text" id="category" name="category" placeholder="category"
-                           th:field="*{category}"
-                           class="form-control" />
-                </div>
                 </div>
 
                 <div class="form-group">
                     <label>Description:</label><br>
                     <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="text" id="description" name="description" placeholder="description"
+                               th:field="*{description}"
+                               class="form-control"/>
                     </div>
-                    <input type="text" id="description" name="description" placeholder="description"
-                           th:field="*{description}"
-                           class="form-control" />
-                </div>
                 </div>
 
                 <div class="form-group">
                     <label>Image:</label><br>
-                    <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="text" id="imageUrl" name="imageUrl" placeholder="movie image"
-                           th:field="*{imageUrl}"
-                           class="form-control" />
-                </div>
+                        <div class="form-group">
+                            <input type="file" name="image" accept="image/png, image/jpeg, image/jpg" />
+                        </div>
                 </div>
 
                 <div class="form-group">
                     <label>Language:</label><br>
                     <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input type="text" id="language" name="language" placeholder="language"
+                               th:field="*{language}"
+                               class="form-control"/>
                     </div>
-                    <input type="text" id="language" name="language" placeholder="language"
-                           th:field="*{language}"
-                           class="form-control" />
-                </div>
                 </div>
 
                 <div class="form-group">
@@ -128,7 +126,7 @@
 </html>
 
 <style>
-    body{
-        background-image:url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg");
+    body {
+        background-image: url("https://hdwallsource.com/img/2014/9/blur-26347-27038-hd-wallpapers.jpg");
     }
 </style>

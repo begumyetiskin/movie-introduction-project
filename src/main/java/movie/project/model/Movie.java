@@ -9,11 +9,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "movies")
 public class Movie {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "movie_id",unique=true, nullable = false)
-
     private Long id;
 
     @Column(nullable = false)
@@ -28,10 +29,18 @@ public class Movie {
     @Column(nullable = false)
     private String description;
 
-    @Column(name="image", nullable = false)
+
+    @Column(name="image", nullable = false, length = 64)
     private String imageUrl;
 
     @Column(nullable = false)
     private String language;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (imageUrl == null || id == null) return null;
+
+        return "/movie-photos/" + id + "/" + imageUrl;
+    }
 
 }

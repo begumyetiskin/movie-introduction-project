@@ -113,7 +113,7 @@ public class UserController {
                 .anyMatch(r -> r.getAuthority().equals("ADMIN"));*/
 
         if (currentUser.getRole().getId() == 1) {
-            return "redirect:/list";
+            return "redirect:/movie/list";
         }
         if (currentUser.getRole().getId() == 2) {
             return "redirect:/movie/listMovie";

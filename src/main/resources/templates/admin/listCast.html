@@ -23,11 +23,14 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/movie/list">Movies </a>
+            <li class="nav-item">
+                <a class="nav-link" href="/movie/listMovie">Movies </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/movie/add">Add Movie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cast/listCast">Casts </a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -43,15 +46,14 @@
         <table class="table table-hover table-striped">
             <thead>
             <tr class="thead-dark">
-                <th>Id</th>
                 <th>First Name</th>
                 <th>Last Name</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
 
             <tr th:each="cast : ${casts}">
-                <td th:text="${cast.id}"></td>
                 <td th:text="${cast.firstName}"></td>
                 <td th:text="${cast.lastName}"></td>
                 <td>
@@ -59,7 +61,6 @@
                     <a th:href="@{/cast/delete/{id}(id=${cast.id})}"  class="btn btn-danger"><i class="fas fa-trash"></i></a>
                 </td>
             </tr>
-
             </tbody>
         </table>
     </div>
@@ -81,6 +82,6 @@
     }
 
     table {
-        width: 500px;
+        width: 100%;;
     }
 </style>
